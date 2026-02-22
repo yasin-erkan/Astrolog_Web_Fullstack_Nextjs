@@ -1,6 +1,6 @@
-# Astrolog ...
+# Astrolog Ümran
 
-A multilingual website for **Ü.E — Astrology & Holistic Healing**. Built with Next.js 16 and React 19.
+A multilingual website for **Astrology & Holistic Healing**. Built with Next.js 16 and React 19.
 
 ---
 

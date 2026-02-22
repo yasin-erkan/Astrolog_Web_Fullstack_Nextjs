@@ -122,7 +122,7 @@ const Navbar = ({lang = 'tr'}: {lang?: string}) => {
             />
             <div className="flex flex-col gap-0.5 shrink-0">
               <span className="font-cinzel text-[20px] md:text-[30px] tracking-[0.1em] text-[#2d2a26] uppercase leading-none">
-                Ümran Erkan
+                Astrolog
               </span>
               <span className="font-montserrat text-[10px] md:text-[12px] tracking-[0.25em] text-[#b3916e] uppercase">
                 Astroloji & Bütünsel Şifa
