@@ -1,17 +1,45 @@
 # Astrolog Ümran
 
-A multilingual website for **Astrology & Holistic Healing**. Built with Next.js 16 and React 19.
+Multilingual site for **Astrology & Holistic Healing** Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
+
+---
+
+## Screenshots
+
+Add your three screenshots to `public/screenshots/` as:
+
+- `screenshot-1.png` — e.g. home / hero
+- `screenshot-2.png` — e.g. nav or another section
+- `screenshot-3.png` — e.g. third view
+
+They will appear below (reduced size):
+
+|                                                                                   |
+| :-------------------------------------------------------------------------------: |
+| <img src="./public/screenshots/screenshot-1.png" alt="Home / Hero" width="640" /> |
+|  _Home – hero section (parallax rings, stagger, CTA, floating Birth Chart box)_   |
+
+|                                                                                    |
+| :--------------------------------------------------------------------------------: |
+| <img src="./public/screenshots/screenshot-2.png" alt="Screenshot 2" width="640" /> |
+|                                   _Screenshot 2_                                   |
+
+|                                                                                    |
+| :--------------------------------------------------------------------------------: |
+| <img src="./public/screenshots/screenshot-3.png" alt="Screenshot 3" width="640" /> |
+|                                   _Screenshot 3_                                   |
 
 ---
 
 ## Tech Stack
 
-| Area      | Stack                                    |
-| --------- | ---------------------------------------- |
-| Framework | Next.js 16 (App Router)                  |
-| UI        | React 19, Tailwind CSS v4, Framer Motion |
-| Language  | TypeScript                               |
-| Fonts     | Google Fonts (Cinzel, Montserrat)        |
+| Area      | Stack                                     |
+| --------- | ----------------------------------------- |
+| Framework | Next.js 16 (App Router)                   |
+| UI        | React 19, Tailwind CSS v4, Framer Motion  |
+| Language  | TypeScript                                |
+| Fonts     | Google Fonts (Cinzel, Montserrat)         |
+| i18n      | In-app `translations.ts` (en, tr, de, fr) |
 
 ---
 
@@ -20,23 +48,29 @@ A multilingual website for **Astrology & Holistic Healing**. Built with Next.js 
 ```
 src/
 ├── app/
-│   ├── [lang]/              # Locale segment (tr, en, de, fr)
-│   │   ├── layout.tsx       # Root layout, Navbar, fonts
-│   │   ├── page.tsx         # Home (hero + zodiac section)
-│   │   ├── iletisim/        # Contact
-│   │   ├── akademi/         # Academy
-│   │   ├── sifa/            # Healing
-│   │   ├── astro-pilates/
-│   │   └── danismanlik/     # Consultancy
-│   │       ├── dogum-haritasi/  # Birth chart
-│   │       └── sinastri/
-│   └── globals.css
+│   ├── [lang]/                    # Locale: tr, en, de, fr
+│   │   ├── layout.tsx             # Root layout, Navbar, theme
+│   │   ├── page.tsx               # Home (HeroSection + zodiac grid)
+│   │   ├── consultations/         # Birth chart, Synastry, Karmic, etc.
+│   │   ├── healing/               # Sessions, events, sub-pages
+│   │   ├── academy/               # Beginner, recordings, blog, sky-calendar
+│   │   ├── free-chart/
+│   │   └── contact/
+│   └── globals.css                # Theme vars, hero, nav, zodiac
 ├── components/
+│   ├── hero/
+│   │   └── HeroSection.tsx        # Parallax rings, stagger, CTA fill, floating box
 │   └── navbar/
-│       └── Navbar.tsx       # Logo, menu links, language selector (flags)
+│       └── Navbar.tsx             # Logo (star/moon), mega dropdowns, theme/lang
 ├── constants/
-│   └── services.ts         # Consultancy & healing service lists
-└── middleware.ts            # / → /tr redirect
+│   ├── navConfig.ts               # NAV_ITEMS (Consultations, Healing, Academy), NAV_CTA
+│   └── nav.ts
+├── i18n/
+│   └── translations.ts            # t(), getTranslations, all locale copy
+└── lib/
+    └── fonts.ts
+public/
+└── screenshots/                  # Add screenshot-1.png, screenshot-2.png, screenshot-3.png
 ```
 
 ---
@@ -45,57 +79,53 @@ src/
 
 ```bash
 npm install
-npm run dev    # http://localhost:3000
+npm run dev   # http://localhost:3000
 npm run build
 npm start
 ```
 
-Root path `/` redirects to `/tr`.
+Root `/` redirects to `/tr`.
 
 ---
 
-## Locales
+## Locales & Routes
 
-- **tr** — Türkçe (default)
-- **en** — English
-- **de** — Deutsch
-- **fr** — Français
-
-URLs: `/[lang]/...` (e.g. `/tr`, `/en/iletisim`). Language is switched via the flag dropdown in the navbar.
+- **tr** (default), **en**, **de**, **fr**
+- URLs: `/[lang]/...` (e.g. `/en/consultations/birth-chart`)
+- Nav: click-to-open dropdowns (Consultations, Healing, Academy), theme toggle, language selector
 
 ---
 
 ## Design
 
-- **Palette** (in `tailwind.config.ts`): `astro` theme
-  - `astro-gold` (#b3916e) — accent, buttons
-  - `astro-dark` (#2d2a26) — text
-  - `astro-bg` (#fdfbf7) — background
-  - `astro-border`, `astro-muted` — borders and secondary text
-- **Fonts:** Cinzel for headings, Montserrat for body.
+- **Theme:** CSS vars in `globals.css` — `--theme-bg`, `--theme-text`, `--theme-border`; dark mode `[data-theme="dark"]`.
+- **Accent:** `#b3916e` (astro-gold) — buttons, links, logo, hero.
+- **Fonts:** Cinzel (headings / luxury), Montserrat (body); italic extralight for hero subtitle.
+- **Hero:** Layered parallax (rotating rings), staggerChildren slide-up, CTA with left-to-right fill on hover, floating “Birth Chart” box (i18n).
+- **Logo:** SVG — rotating outer ring, inner ring, 8-point star, center + top/bottom dots (no text inside).
+- **Responsive:** Mobile hamburger, dropdowns in portal with fixed position, hero and nav scale for small screens.
 
 ---
 
-## Current Features
+## Features
 
-- [x] Multi-language routing and language selector
-- [x] Navbar with logo, menu, consultancy dropdown, language dropdown
-- [x] Home page (hero, CTA, zodiac section)
-- [x] Pages: Contact, Academy, Healing, Astro-Pilates, Consultancy (Birth Chart, Synastry)
-- [x] Shared color palette and typography
+- [x] Multi-language (tr, en, de, fr) and language switcher
+- [x] Nav: logo, Consultations / Healing / Academy mega dropdowns (click), CTA “Free Chart”, theme + lang
+- [x] Home: hero (parallax rings, stagger, CTA, floating box), zodiac sign grid
+- [x] Consultations: Birth Chart, Synastry, Karmic, Spiritual, Business, Electional
+- [x] Healing: sessions + events groups; Academy: beginner, recordings, blog, sky-calendar
+- [x] Dark/light theme
+- [x] Responsive layout and nav
 
 ---
 
 ## Roadmap
 
-- [ ] **Content:** About page and localized copy for all languages
-- [ ] **Consultancy:** Wire all consultancy/healing sub-pages from `services.ts`
-- [ ] **Contact:** Form and/or map integration
-- [ ] **CTA:** “Danışmanlık Alın” button → booking or contact flow
-- [ ] **Backend / Fullstack:** API, database, auth for admin
-- [ ] **Admin:** `/admin` panel for content and bookings
-- [ ] **SEO:** Per-page and per-locale metadata, Open Graph
-- [ ] **Performance:** Image optimization, lazy loading
+- [ ] Content: About, localized copy
+- [ ] Contact: form / map
+- [ ] CTA: booking or contact flow
+- [ ] SEO: per-page and per-locale metadata
+- [ ] Backend / admin if needed
 
 ---
 

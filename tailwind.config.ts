@@ -2,6 +2,7 @@
 import type {Config} from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -20,6 +21,9 @@ const config: Config = {
           bg: '#fdfbf7',
           border: '#e5e1da',
           muted: '#6b6560',
+          'dark-bg': '#161412',
+          'dark-text': '#ebe9e6',
+          'dark-border': '#3a3632',
         },
       },
     },

@@ -1,17 +1,17 @@
 // src/constants/services.ts
-export const DANISMANLIKLAR = [
-  {id: 1, title: 'Doğum Haritası Danışmanlığı', slug: 'dogum-haritasi'},
-  {id: 2, title: 'Sinastri Danışmanlığı', slug: 'sinastri'},
-  {id: 3, title: 'Tek Soru Danışmanlığı', slug: 'tek-soru'},
-  {id: 4, title: 'Element Nitelik Analizi', slug: 'element-nitelik'},
-  {id: 5, title: 'Zamanla Senkronizasyon', slug: 'zaman-senkron'},
-  {id: 6, title: 'Gezegenlerin Günü', slug: 'gezegenlerin-gunu'},
+export const CONSULTATIONS = [
+  {id: 1, title: 'Birth Chart Consultation', slug: 'birth-chart'},
+  {id: 2, title: 'Synastry Consultation', slug: 'synastry'},
+  {id: 3, title: 'Single Question Consultation', slug: 'single-question'},
+  {id: 4, title: 'Element & Quality Analysis', slug: 'element-quality'},
+  {id: 5, title: 'Time Synchronization', slug: 'time-sync'},
+  {id: 6, title: 'Planetary Day', slug: 'planets-day'},
 ];
 
-export const SIFA_VE_FARKINDALIK = [
-  {id: 7, title: 'Şifalı Taşlar', slug: 'sifali-taslar'},
-  {id: 8, title: 'Karma ve Okült Semboller', slug: 'karma-semboller'},
-  {id: 9, title: 'Astro Şifa', slug: 'astro-sifa'},
-  {id: 10, title: 'Beden Farkındalığı', slug: 'beden-farkindaligi'},
+export const HEALING_AND_AWARENESS = [
+  {id: 7, title: 'Healing Stones', slug: 'healing-stones'},
+  {id: 8, title: 'Karma & Occult Symbols', slug: 'karma-symbols'},
+  {id: 9, title: 'Astro Healing', slug: 'astro-healing'},
+  {id: 10, title: 'Body Awareness', slug: 'body-awareness'},
   {id: 11, title: 'Theta Healing', slug: 'theta-healing'},
 ];

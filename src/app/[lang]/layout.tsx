@@ -1,16 +1,15 @@
-import {Cinzel, Montserrat} from 'next/font/google';
 import Navbar from '../../components/navbar/Navbar';
 import '../../app/globals.css';
+import {LOCALES} from '@/constants/nav';
+import {cinzel, montserrat} from '@/lib/fonts';
+import {ThemeProvider} from '@/components/ThemeProvider';
+import {ThemeScript} from '@/components/ThemeScript';
 
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  variable: '--font-cinzel',
-});
+const LOCALE_CODES = LOCALES.map(l => l.code);
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-});
+export function generateStaticParams() {
+  return LOCALE_CODES.map(lang => ({lang}));
+}
 
 export default async function RootLayout({
   children,
@@ -21,10 +20,15 @@ export default async function RootLayout({
 }) {
   const {lang} = await params;
   return (
-    <html lang={lang} className={`${cinzel.variable} ${montserrat.variable}`}>
-      <body className="font-montserrat antialiased bg-astro-bg text-astro-dark">
-        <Navbar lang={lang} />
-        {children}
+    <html lang={lang} className={`${cinzel.variable} ${montserrat.variable}`} data-theme="dark" suppressHydrationWarning>
+      <body className="font-montserrat antialiased">
+        <ThemeScript />
+        <ThemeProvider>
+          <Navbar lang={lang} />
+          <div className="min-h-screen overflow-x-hidden">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

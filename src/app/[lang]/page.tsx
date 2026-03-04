@@ -1,39 +1,39 @@
-export default function Home() {
+import {getTranslations} from '@/i18n/translations';
+import HeroSection from '@/components/hero/HeroSection';
+
+export default async function Home({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}) {
+  const {lang} = await params;
+  const {locale} = getTranslations(lang);
+  const signs = locale.home.zodiacSigns;
+
   return (
     <main>
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex flex-col items-center justify-start pt-12 md:pt-16 text-center px-4 overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(179,145,110,0.25),transparent_50%)] bg-astro-dark" />
+      <HeroSection
+        subtitle={locale.home.heroSubtitle}
+        ctaText={locale.home.bookConsultation}
+        floatingLabel={locale.home.heroFloatingLabel}
+        lang={lang}
+      />
 
-        <div className="z-10 animate-fade-in">
-          <span className="text-astro-gold text-5xl mb-6 block">🌙</span>
-          <h1 className="font-cinzel text-6xl md:text-8xl text-astro-gold mb-4 tracking-wider drop-shadow-[0_4px_20px_rgba(179,145,110,0.25)]">
-            Astrolog
-          </h1>
-          <p className="font-montserrat text-lg md:text-2xl text-astro-gold/85 tracking-[0.4em] uppercase mb-10">
-            Gökyüzünün Kadim Rehberliği
-          </p>
-          <button className="px-12 py-4 bg-astro-gold text-astro-dark font-semibold uppercase tracking-widest hover:bg-astro-gold/90 hover:brightness-110 transition-all duration-300 rounded-sm">
-            Danışmanlık Alın
-          </button>
-        </div>
-      </section>
-
-      {/* HOROSCOPES SECTION (Bottom of the image) */}
-      <section className="max-w-7xl mx-auto py-24 px-6 bg-astro-bg">
-        <h2 className="font-cinzel text-4xl text-center mb-16 text-astro-dark">
-          Gökyüzü Rehberiniz
+      {/* Zodiac signs: card grid with hover glow / lift */}
+      <section className="max-w-7xl mx-auto py-12 sm:py-16 md:py-24 px-4 sm:px-6 theme-bg">
+        <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl text-center mb-10 md:mb-16 theme-text">
+          {locale.home.yourSkyGuide}
         </h2>
-        <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-8">
-          {BURCLAR.map(burc => (
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5">
+          {signs.map(sign => (
             <div
-              key={burc.name}
-              className="flex flex-col items-center group cursor-pointer">
-              <div className="w-16 h-16 rounded-full border border-astro-border flex items-center justify-center mb-3 group-hover:scale-110 group-hover:border-astro-gold transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(179,145,110,0.2)]">
-                <span className="text-2xl">{burc.symbol}</span>
+              key={sign.name}
+              className="zodiac-card group/card cursor-pointer rounded-xl border theme-border bg-(--theme-bg) p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-300 ease-out hover:border-astro-gold hover:shadow-[0_0_28px_rgba(179,145,110,0.22)] hover:shadow-astro-gold/20 hover:-translate-y-1 hover:scale-[1.02] focus-within:border-astro-gold focus-within:shadow-[0_0_28px_rgba(179,145,110,0.22)] focus-within:-translate-y-1 focus-within:scale-[1.02] focus:outline-none">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 theme-border flex items-center justify-center mb-3 transition-all duration-300 group-hover/card:border-astro-gold group-hover/card:shadow-[0_0_24px_rgba(179,145,110,0.35)] group-hover/card:scale-110 group-hover/card:bg-astro-gold/5">
+                <span className="text-2xl sm:text-3xl transition-transform duration-300 group-hover/card:scale-110">{sign.symbol}</span>
               </div>
-              <span className="text-[10px] font-montserrat uppercase tracking-widest text-astro-muted group-hover:text-astro-gold transition-colors">
-                {burc.name}
+              <span className="text-[10px] sm:text-xs font-montserrat uppercase tracking-widest text-(--theme-text)/70 transition-colors duration-300 group-hover/card:text-astro-gold">
+                {sign.name}
               </span>
             </div>
           ))}
@@ -42,19 +42,3 @@ export default function Home() {
     </main>
   );
 }
-
-//  add to the bottom of the page or constants
-const BURCLAR = [
-  {name: 'Koç', symbol: '♈'},
-  {name: 'Boğa', symbol: '♉'},
-  {name: 'İkizler', symbol: '♊'},
-  {name: 'Yengeç', symbol: '♋'},
-  {name: 'Aslan', symbol: '♌'},
-  {name: 'Başak', symbol: '♍'},
-  {name: 'Terazi', symbol: '♎'},
-  {name: 'Akrep', symbol: '♏'},
-  {name: 'Yay', symbol: '♐'},
-  {name: 'Oğlak', symbol: '♑'},
-  {name: 'Kova', symbol: '♒'},
-  {name: 'Balık', symbol: '♓'},
-];

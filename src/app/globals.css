@@ -1,6 +1,33 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  --theme-bg: #fdfbf7;
+  --theme-text: #2d2a26;
+  --theme-border: #e5e1da;
+  --theme-on-accent: #2d2a26;
+  --nav-hover-bg: rgba(179, 145, 110, 0.1);
+  --nav-active-bg: rgba(179, 145, 110, 0.12);
+  --nav-hover-shadow: 0 2px 8px rgba(179, 145, 110, 0.15);
+  --nav-active-shadow: 0 2px 8px rgba(179, 145, 110, 0.12);
+  --nav-btn-shadow: 0 4px 12px rgba(179, 145, 110, 0.2);
+  --nav-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+[data-theme="dark"] {
+  --theme-bg: #161412;
+  --theme-text: #ebe9e6;
+  --theme-border: #3a3632;
+  --theme-on-accent: #161412;
+  --nav-hover-bg: rgba(179, 145, 110, 0.25);
+  --nav-active-bg: rgba(179, 145, 110, 0.2);
+  --nav-hover-shadow: 0 2px 12px rgba(179, 145, 110, 0.28);
+  --nav-active-shadow: 0 2px 12px rgba(179, 145, 110, 0.22);
+  --nav-btn-shadow: 0 4px 16px rgba(179, 145, 110, 0.35);
+  --nav-dropdown-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.theme-bg { background-color: var(--theme-bg); }
+.theme-text { color: var(--theme-text); }
+.theme-border { border-color: var(--theme-border); }
 
 @layer base {
   * {
@@ -10,13 +37,279 @@
   }
 }
 
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
 body {
-  background-color: #fdfbf7;
-  color: #2d2a26;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
   min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-/* Navbar menü 768px+ mutlaka görünsün */
+/* Nav: no browser default link colors */
+.astro-nav a,
+.astro-nav a:visited {
+  color: inherit;
+}
+
+/* Nav: easing for premium feel */
+.astro-nav {
+  --nav-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-duration: 0.28s;
+}
+
+/* Nav link: animated underline + color transition */
+.astro-nav .nav-link {
+  position: relative;
+  transition: color var(--nav-duration) var(--nav-ease);
+}
+.astro-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 100%;
+  max-width: calc(100% - 12px);
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #b3916e, transparent);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform var(--nav-duration) var(--nav-ease);
+  border-radius: 1px;
+}
+.astro-nav .nav-link:hover {
+  color: #b3916e;
+  text-shadow: 0 0 20px rgba(179, 145, 110, 0.25);
+}
+.astro-nav .nav-link:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+.astro-nav .nav-link-active {
+  color: #b3916e;
+  font-weight: 600;
+}
+.astro-nav .nav-link-active::after {
+  transform: translateX(-50%) scaleX(1);
+  background: #b3916e;
+  opacity: 0.9;
+}
+
+/* CONSULTATIONS trigger: same underline idea */
+.astro-nav .nav-dropdown-trigger {
+  position: relative;
+  transition: color var(--nav-duration) var(--nav-ease);
+}
+.astro-nav .nav-dropdown-trigger::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 80%;
+  height: 1.5px;
+  background: #b3916e;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform var(--nav-duration) var(--nav-ease);
+  border-radius: 1px;
+}
+.astro-nav .nav-dropdown-trigger:hover {
+  color: #b3916e;
+  text-shadow: 0 0 20px rgba(179, 145, 110, 0.25);
+}
+.astro-nav .nav-dropdown-trigger:hover::after,
+.astro-nav .nav-dropdown-trigger[data-open="true"]::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Dropdown panel */
+.astro-nav .nav-dropdown {
+  box-shadow: var(--nav-dropdown-shadow);
+  transform-origin: top;
+}
+
+/* Dropdown items: slide-right accent */
+.astro-nav .nav-dropdown a {
+  position: relative;
+  padding-left: 12px;
+  border-left: 2px solid transparent;
+  margin-left: 4px;
+  transition: color var(--nav-duration) var(--nav-ease),
+    border-color var(--nav-duration) var(--nav-ease),
+    padding-left var(--nav-duration) var(--nav-ease);
+}
+.astro-nav .nav-dropdown a:hover {
+  color: #b3916e;
+  border-left-color: #b3916e;
+  padding-left: 16px;
+  text-shadow: 0 0 16px rgba(179, 145, 110, 0.2);
+}
+
+/* Theme & lang buttons: scale + glow */
+.astro-nav .nav-btn {
+  transition: border-color var(--nav-duration) var(--nav-ease),
+    box-shadow 0.35s var(--nav-ease),
+    transform 0.25s var(--nav-ease);
+}
+.astro-nav .nav-btn:hover {
+  border-color: #b3916e;
+  box-shadow: var(--nav-btn-shadow);
+  transform: scale(1.03);
+}
+.astro-nav .nav-btn:active {
+  transform: scale(0.98);
+}
+
+.nav-lang-dropdown {
+  box-shadow: var(--nav-dropdown-shadow);
+  animation: nav-lang-in 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+@keyframes nav-lang-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero: background drift (subtle) */
+@keyframes hero-bg-drift {
+  0% { transform: scale(1) translateY(0) translateX(0); }
+  100% { transform: scale(1.05) translateY(-2%) translateX(1%); }
+}
+
+/* Hero: rotating rings – infinity/space, low opacity */
+@keyframes hero-ring-rotate {
+  to { transform: rotate(360deg); }
+}
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(179, 145, 110, 0.18);
+  pointer-events: none;
+}
+.hero-ring-1 { width: min(90vmax, 800px); height: min(90vmax, 800px); left: 50%; top: 50%; transform: translate(-50%, -50%); animation: hero-ring-rotate 35s linear infinite; }
+.hero-ring-2 { width: min(70vmax, 600px); height: min(70vmax, 600px); left: 50%; top: 50%; transform: translate(-50%, -50%); animation: hero-ring-rotate 28s linear infinite reverse; }
+.hero-ring-3 { width: min(50vmax, 400px); height: min(50vmax, 400px); left: 50%; top: 50%; transform: translate(-50%, -50%); animation: hero-ring-rotate 22s linear infinite; }
+[data-theme="dark"] .hero-ring { border-color: rgba(179, 145, 110, 0.22); }
+
+/* Hero: CTA – left-to-right fill on hover (motion.div feel) */
+.hero-cta-wrap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid #b3916e;
+}
+
+.hero-cta-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #b3916e;
+  transition: width 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+
+.hero-cta-wrap:hover::before {
+  width: 100%;
+}
+
+.hero-cta-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: #b3916e;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-cta-wrap:hover .hero-cta-btn {
+  color: var(--theme-on-accent);
+}
+
+.hero-cta-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(179, 145, 110, 0.35);
+}
+
+/* Hero: floating card (3D depth) */
+.hero-float-box {
+  position: absolute;
+  z-index: 5;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(179, 145, 110, 0.4);
+  border-radius: 8px;
+  background: var(--theme-bg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #b3916e;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.hero-float-box:hover {
+  border-color: #b3916e;
+  box-shadow: 0 0 24px rgba(179, 145, 110, 0.25);
+  transform: translateY(-2px);
+}
+[data-theme="dark"] .hero-float-box {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+.hero-float-wrap {
+  right: 5%;
+  bottom: 18%;
+}
+@media (max-width: 767px) {
+  .hero-float-wrap {
+    right: 0.75rem;
+    bottom: 1.25rem;
+  }
+  .hero-float-box {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+  }
+}
+@media (min-width: 768px) {
+  .hero-float-wrap {
+    right: 8%;
+    bottom: 20%;
+  }
+}
+
+/* Zodiac grid: card hover glow */
+.zodiac-card {
+  --zodiac-glow: 0 0 28px rgba(179, 145, 110, 0.22);
+}
+.zodiac-card:hover {
+  box-shadow: var(--zodiac-glow), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] .zodiac-card:hover {
+  box-shadow: var(--zodiac-glow), 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar menu visible from 768px+ */
 .navbar-desktop {
   display: none;
 }
