@@ -5,19 +5,20 @@ Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
 
 ## Screenshots
 
-Add `screenshot-1.png`, `screenshot-2.png`, `screenshot-3.png` to `public/screenshots/`; they render below at 640px width.
+Screenshots in `public/`: `screenshot-1.png`, `screenshot-2.png`, `screenshot-3.png`.
 
 | |
 | :---: |
-| <img src="https://raw.githubusercontent.com/yasin-erkan/Astrolog_Web_Fullstack_Nextjs/main/public/screenshots/screenshot-1.png" alt="Home" width="640" /> |
+| ![Home](public/screenshot-1.png) |
+| *Home — hero* |
 
 | |
 | :---: |
-| <img src="https://raw.githubusercontent.com/yasin-erkan/Astrolog_Web_Fullstack_Nextjs/main/public/screenshots/screenshot-2.png" alt="Screenshot 2" width="640" /> |
+| ![Screenshot 2](public/screenshot-2.png) |
 
 | |
 | :---: |
-| <img src="https://raw.githubusercontent.com/yasin-erkan/Astrolog_Web_Fullstack_Nextjs/main/public/screenshots/screenshot-3.png" alt="Screenshot 3" width="640" /> |
+| ![Screenshot 3](public/screenshot-3.png) |
 
 ---
 
