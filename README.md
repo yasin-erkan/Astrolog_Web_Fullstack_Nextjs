@@ -1,33 +1,23 @@
-# Astrolog Ümran
-
-Multilingual site for **Astrology & Holistic Healing** Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
+Multilingual site for **Astrology & Holistic Healing**
+Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
 
 ---
 
 ## Screenshots
 
-Add your three screenshots to `public/screenshots/` as:
+Add `screenshot-1.png`, `screenshot-2.png`, `screenshot-3.png` to `public/screenshots/`; they render below at 640px width.
 
-- `screenshot-1.png` — e.g. home / hero
-- `screenshot-2.png` — e.g. nav or another section
-- `screenshot-3.png` — e.g. third view
+| |
+| :---: |
+| <img src="./public/screenshots/screenshot-1.png" alt="Home" width="640" /> |
 
-They will appear below (reduced size):
-
-|                                                                                   |
-| :-------------------------------------------------------------------------------: |
-| <img src="./public/screenshots/screenshot-1.png" alt="Home / Hero" width="640" /> |
-|  _Home – hero section (parallax rings, stagger, CTA, floating Birth Chart box)_   |
-
-|                                                                                    |
-| :--------------------------------------------------------------------------------: |
+| |
+| :---: |
 | <img src="./public/screenshots/screenshot-2.png" alt="Screenshot 2" width="640" /> |
-|                                   _Screenshot 2_                                   |
 
-|                                                                                    |
-| :--------------------------------------------------------------------------------: |
+| |
+| :---: |
 | <img src="./public/screenshots/screenshot-3.png" alt="Screenshot 3" width="640" /> |
-|                                   _Screenshot 3_                                   |
 
 ---
 
