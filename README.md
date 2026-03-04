@@ -5,20 +5,20 @@ Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
 
 ## Screenshots
 
-Screenshots in `public/`: `screenshot-1.png`, `screenshot-2.png`, `screenshot-3.png`.
+Screenshots in `public/`: `1.png`, `2.png`, `3.png`.
 
 | |
 | :---: |
-| ![Home](public/screenshot-1.png) |
+| ![Home](public/1.png) |
 | *Home — hero* |
 
 | |
 | :---: |
-| ![Screenshot 2](public/screenshot-2.png) |
+| ![Screenshot 2](public/2.png) |
 
 | |
 | :---: |
-| ![Screenshot 3](public/screenshot-3.png) |
+| ![Screenshot 3](public/3.png) |
 
 ---
 
