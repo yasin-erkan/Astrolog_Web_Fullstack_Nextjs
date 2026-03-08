@@ -29,7 +29,7 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function Footer({lang}: {lang: string}) {
+export default function Footer({lang, motto}: {lang: string; motto?: string}) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -37,9 +37,9 @@ export default function Footer({lang}: {lang: string}) {
       <div className="footer-inner">
         <div className="footer-brand">
           <Link href={`/${lang}`} className="footer-logo">
-            <span className="font-cinzel text-xl tracking-[0.15em] text-astro-gold uppercase">Luminosa</span>
+            <span className="font-cinzel text-xl tracking-[0.15em] text-astro-gold uppercase">Astrolog Umran</span>
           </Link>
-          <p className="footer-tagline">Astrology & Holistic Healing</p>
+          <p className="footer-tagline">{motto ?? 'Astrology & Holistic Healing'}</p>
         </div>
 
         <div className="footer-social">
@@ -72,7 +72,7 @@ export default function Footer({lang}: {lang: string}) {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copy">&copy; {currentYear} Luminosa. All rights reserved.</p>
+          <p className="footer-copy">&copy; {currentYear} Astrolog Umran. All rights reserved.</p>
         </div>
       </div>
     </footer>

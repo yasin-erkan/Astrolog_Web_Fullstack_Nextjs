@@ -5,6 +5,8 @@
   --theme-text: #2d2a26;
   --theme-border: #e5e1da;
   --theme-on-accent: #2d2a26;
+  --luminosa-copper: #b87333;
+  --luminosa-rose-gold: #b76e79;
   --nav-hover-bg: rgba(179, 145, 110, 0.1);
   --nav-active-bg: rgba(179, 145, 110, 0.12);
   --nav-hover-shadow: 0 2px 8px rgba(179, 145, 110, 0.15);
@@ -17,6 +19,8 @@
   --theme-text: #ebe9e6;
   --theme-border: #3a3632;
   --theme-on-accent: #161412;
+  --luminosa-copper: #c9956a;
+  --luminosa-rose-gold: #c97a85;
   --nav-hover-bg: rgba(179, 145, 110, 0.25);
   --nav-active-bg: rgba(179, 145, 110, 0.2);
   --nav-hover-shadow: 0 2px 12px rgba(179, 145, 110, 0.28);

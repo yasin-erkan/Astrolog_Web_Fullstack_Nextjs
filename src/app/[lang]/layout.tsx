@@ -5,6 +5,7 @@ import {LOCALES} from '@/constants/nav';
 import {cinzel, montserrat} from '@/lib/fonts';
 import {ThemeProvider} from '@/components/ThemeProvider';
 import {ThemeScript} from '@/components/ThemeScript';
+import {getTranslations} from '@/i18n/translations';
 
 const LOCALE_CODES = LOCALES.map(l => l.code);
 
@@ -20,15 +21,17 @@ export default async function RootLayout({
   params: Promise<{lang: string}>;
 }) {
   const {lang} = await params;
+  const {locale} = getTranslations(lang);
+  const motto = locale.brand?.motto;
   return (
     <html lang={lang} className={`${cinzel.variable} ${montserrat.variable}`} data-theme="dark" suppressHydrationWarning>
       <body className="font-montserrat antialiased">
         <ThemeScript />
         <ThemeProvider>
           <Navbar lang={lang} />
-          <div className="min-h-screen overflow-x-hidden flex flex-col">
+          <div className="min-h-screen overflow-x-hidden flex flex-col pt-[72px] md:pt-20">
             {children}
-            <Footer lang={lang} />
+            <Footer lang={lang} motto={motto} />
           </div>
         </ThemeProvider>
       </body>

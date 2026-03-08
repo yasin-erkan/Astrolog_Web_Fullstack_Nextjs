@@ -17,6 +17,8 @@ const config: Config = {
       colors: {
         astro: {
           gold: '#b3916e',
+          copper: '#b87333',
+          roseGold: '#b76e79',
           dark: '#2d2a26',
           bg: '#fdfbf7',
           border: '#e5e1da',

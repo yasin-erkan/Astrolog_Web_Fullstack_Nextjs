@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {usePathname} from 'next/navigation';
 import {forwardRef, useState, useEffect, useRef} from 'react';
 import {createPortal} from 'react-dom';
@@ -180,34 +181,32 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
 
   return (
     <>
-      <nav className="astro-nav theme-bg sticky top-0 z-800 w-full pt-8 md:pt-12 pb-0 transition-colors">
+      <nav className="astro-nav theme-bg fixed top-0 left-0 right-0 z-800 w-full pt-3 md:pt-4 pb-0 transition-colors">
         <div
-          className="max-w-[1750px] mx-auto flex flex-wrap items-center justify-between gap-4 pl-4 pr-4 md:pl-12 md:pr-16 lg:pr-20 md:gap-6">
+          className="max-w-[1750px] mx-auto flex flex-wrap items-center justify-between gap-3 pl-4 pr-4 md:pl-12 md:pr-16 lg:pr-20 md:gap-5">
           <Link
             href={`/${lang}`}
-            className="flex items-center gap-4 md:gap-5 shrink-0 no-underline rounded-lg transition-all duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold/50">
-            <div className="relative w-[70px] h-[70px] md:w-[100px] md:h-[100px] flex justify-center items-center shrink-0">
-              <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible" aria-hidden>
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#b8926a" strokeWidth="0.6" opacity="0.3">
-                  <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="50s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="50" cy="50" r="38" fill="none" stroke="#b3916e" strokeWidth="1" />
-                <path d="M50,20 L54,42 L78,42 L58,54 L66,78 L50,62 L34,78 L42,54 L22,42 L46,42 Z" fill="none" stroke="#b3916e" strokeWidth="1.2" />
-                <circle cx="50" cy="50" r="3" fill="#b3916e" />
-                <circle cx="50" cy="5" r="1.5" fill="#b3916e" />
-                <circle cx="50" cy="95" r="1.5" fill="#b3916e" />
-              </svg>
+            className="flex items-center gap-3 md:gap-4 shrink-0 no-underline rounded-lg transition-all duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold/50">
+            <div className="relative w-[60px] h-[60px] md:w-[88px] md:h-[88px] flex justify-center items-center shrink-0 overflow-hidden rounded-full">
+              <Image
+                src="/logo.png"
+                alt="Astrolog Umran"
+                width={88}
+                height={88}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
             <div
-              className="w-px h-12 md:h-[72px] shrink-0 opacity-60"
+              className="w-px h-10 md:h-14 shrink-0 opacity-60"
               style={{backgroundColor: 'var(--theme-border)'}}
               aria-hidden
             />
             <div className="flex flex-col gap-0.5 shrink-0">
-              <span className="font-cinzel text-[20px] md:text-[30px] tracking-widest theme-text uppercase leading-none">
-                Luminosa
+              <span className="font-cinzel text-[16px] md:text-[22px] tracking-widest theme-text uppercase leading-none">
+                Astrolog Umran
               </span>
-              <span className="font-montserrat text-[10px] md:text-[12px] tracking-[0.25em] text-astro-gold uppercase">
+              <span className="font-montserrat text-[9px] md:text-[11px] tracking-[0.25em] text-astro-gold uppercase">
                 {t('brand.tagline')}
               </span>
             </div>
