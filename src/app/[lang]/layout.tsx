@@ -1,4 +1,5 @@
 import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
 import '../../app/globals.css';
 import {LOCALES} from '@/constants/nav';
 import {cinzel, montserrat} from '@/lib/fonts';
@@ -25,8 +26,9 @@ export default async function RootLayout({
         <ThemeScript />
         <ThemeProvider>
           <Navbar lang={lang} />
-          <div className="min-h-screen overflow-x-hidden">
+          <div className="min-h-screen overflow-x-hidden flex flex-col">
             {children}
+            <Footer lang={lang} />
           </div>
         </ThemeProvider>
       </body>

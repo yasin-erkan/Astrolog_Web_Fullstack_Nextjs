@@ -10,10 +10,10 @@ import {useTheme} from '@/components/ThemeProvider';
 import {getTranslations} from '@/i18n/translations';
 
 const DROPDOWN_GRID_IDS = ['consultations', 'healing'] as const;
-const DROPDOWN_GROUP_LABEL = 'text-[10px] font-montserrat uppercase tracking-[0.2em] text-astro-gold/70';
-const DROPDOWN_LINK = 'block py-0.5 text-[13px] font-montserrat no-underline rounded transition-colors duration-150 border-l-2 pl-2 -ml-px';
-const DROPDOWN_LINK_ACTIVE = 'text-astro-gold font-semibold border-astro-gold';
-const DROPDOWN_LINK_INACTIVE = 'theme-text border-transparent hover:text-astro-gold';
+const DROPDOWN_GROUP_LABEL = 'nav-dd-label font-montserrat';
+const DROPDOWN_LINK = 'nav-dd-link font-montserrat';
+const DROPDOWN_LINK_ACTIVE = 'nav-dd-link-active';
+const DROPDOWN_LINK_INACTIVE = '';
 
 type NavDropdownPanelProps = {
   item: NavItem & { children: NonNullable<NavItem['children']> };
@@ -34,18 +34,17 @@ const NavDropdownPanel = forwardRef<HTMLDivElement, NavDropdownPanelProps>(funct
   ref,
 ) {
   const renderGroup = (child: Extract<NavItemChild, { groupKey: string; items: unknown[] }>) => (
-    <div key={child.groupKey} className="flex flex-col gap-0.5">
+    <div key={child.groupKey} className="nav-dd-group">
       <span className={groupLabelClass}>{t(child.groupKey)}</span>
-      {child.items.map((link, i) => {
+      {child.items.map((link) => {
         const childPath = `/${lang}/${item.path}/${link.pathSegment}`;
         const active = isChildActive(item.path, link.pathSegment);
-        const featured = isGrid && i === 0;
         return (
           <Link
             key={link.pathSegment}
             href={childPath}
             onClick={() => setOpenMenu(null)}
-            className={`${linkClass} ${active ? linkActiveClass : linkInactiveClass} ${featured ? 'font-semibold' : 'font-normal'}`}>
+            className={`${linkClass} ${active ? linkActiveClass : linkInactiveClass}`}>
             {t(link.labelKey)}
           </Link>
         );
@@ -59,16 +58,16 @@ const NavDropdownPanel = forwardRef<HTMLDivElement, NavDropdownPanelProps>(funct
   return (
     <div
       ref={ref}
-      className={`nav-dropdown fixed theme-bg theme-border border rounded-lg shadow-(--nav-dropdown-shadow) z-9999 ${
-        isGrid ? 'min-w-[320px] max-w-[400px] py-2.5 px-4' : 'min-w-[220px] py-2.5 px-3'
+      className={`nav-dropdown fixed theme-bg theme-border border rounded-xl shadow-(--nav-dropdown-shadow) z-9999 ${
+        isGrid ? 'min-w-[340px] max-w-[420px] py-4 px-5' : 'min-w-[240px] py-3 px-4'
       }`}
       style={{ top: dropdownPos.top, left: dropdownPos.left }}>
       {isGrid && gridChildren?.length ? (
-        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-4">
           {gridChildren.map(renderGroup)}
         </div>
       ) : (
-        <div className="flex flex-col gap-0.5">
+        <div className="nav-dd-group">
           {children.map(child => {
             if (isNavGroup(child)) return renderGroup(child);
             const childPath = `/${lang}/${item.path}/${child.pathSegment}`;
@@ -78,7 +77,7 @@ const NavDropdownPanel = forwardRef<HTMLDivElement, NavDropdownPanelProps>(funct
                 key={child.pathSegment}
                 href={childPath}
                 onClick={() => setOpenMenu(null)}
-                className={`${linkClass} py-1 ${active ? linkActiveClass : linkInactiveClass}`}>
+                className={`${linkClass} ${active ? linkActiveClass : linkInactiveClass}`}>
                 {t(child.labelKey)}
               </Link>
             );
@@ -183,8 +182,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
     <>
       <nav className="astro-nav theme-bg sticky top-0 z-800 w-full pt-8 md:pt-12 pb-0 transition-colors">
         <div
-          className="max-w-[1750px] mx-auto flex justify-between items-center pl-4 pr-4 md:pl-12 md:pr-16 lg:pr-20"
-          style={{gap: 48}}>
+          className="max-w-[1750px] mx-auto flex flex-wrap items-center justify-between gap-4 pl-4 pr-4 md:pl-12 md:pr-16 lg:pr-20 md:gap-6">
           <Link
             href={`/${lang}`}
             className="flex items-center gap-4 md:gap-5 shrink-0 no-underline rounded-lg transition-all duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold/50">
@@ -207,7 +205,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
             />
             <div className="flex flex-col gap-0.5 shrink-0">
               <span className="font-cinzel text-[20px] md:text-[30px] tracking-widest theme-text uppercase leading-none">
-                Astrolog
+                Luminosa
               </span>
               <span className="font-montserrat text-[10px] md:text-[12px] tracking-[0.25em] text-astro-gold uppercase">
                 {t('brand.tagline')}
@@ -215,11 +213,11 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
             </div>
           </Link>
 
+          {/* Center + Right: flex row; center scrolls, right fixed 220px */}
           <div
             ref={menuRef}
-            className="navbar-desktop hidden md:flex flex-1 min-w-0 items-center md:ml-12 lg:ml-16 gap-0">
-            {/* Center: nav links get all remaining space so they don't wrap when locale text is longer */}
-            <div className="flex flex-nowrap items-center gap-2 md:gap-3 lg:gap-4 xl:gap-6 min-w-0 flex-1 overflow-x-auto">
+            className="navbar-desktop hidden md:flex flex-1 min-w-0 items-center md:ml-4 lg:ml-6 gap-0 overflow-hidden">
+            <div className="flex flex-nowrap items-center gap-2 md:gap-2 lg:gap-3 xl:gap-4 min-w-0 flex-1 overflow-x-auto overflow-y-hidden scrollbar-none py-1">
               {NAV_ITEMS.map(item => {
                 const hasChildren = item.children && item.children.length > 0;
                 const fullPath = basePath(item.path);
@@ -290,16 +288,14 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
               })}
             </div>
 
-            {/* CTA: Free Chart / Daily hook */}
-            <Link
-              href={`/${lang}/${NAV_CTA.path}`}
-              className="shrink-0 px-3 py-2 rounded-md bg-astro-gold font-montserrat text-[12px] lg:text-[13px] tracking-widest uppercase no-underline font-semibold transition-all duration-200 hover:brightness-110 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold focus-visible:ring-offset-2 focus-visible:ring-offset-(--theme-bg)"
-              style={{color: 'var(--theme-on-accent)'}}>
-              {t(NAV_CTA.labelKey)}
-            </Link>
-
-            {/* Right: theme + lang only; narrow block pushed to the edge via ml-auto */}
-            <div className="flex items-center shrink-0 gap-1.5 ml-auto">
+            {/* Right: fixed width; CTA has min-width so text never clips */}
+            <div className="flex items-center shrink-0 w-[240px] lg:w-[280px] gap-2 pl-3">
+              <Link
+                href={`/${lang}/${NAV_CTA.path}`}
+                className="nav-cta flex-1 min-w-[8.5rem] py-2.5 rounded-md font-montserrat text-[13px] lg:text-[14px] tracking-widest uppercase no-underline font-semibold transition-all duration-200 hover:brightness-110 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold focus-visible:ring-offset-2 focus-visible:ring-offset-(--theme-bg) text-center whitespace-nowrap overflow-hidden text-ellipsis px-3">
+                {t(NAV_CTA.labelKey)}
+              </Link>
+              <div className="flex items-center shrink-0 gap-1.5">
               <span
                 className="self-stretch w-px theme-border"
                 style={{backgroundColor: 'var(--theme-border)'}}
@@ -352,6 +348,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
                     </div>,
                     document.body,
                   )}
+              </div>
               </div>
             </div>
           </div>
@@ -461,8 +458,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
             <Link
               href={`/${lang}/${NAV_CTA.path}`}
               onClick={() => setMobileOpen(false)}
-              className="mt-3 py-3 px-4 rounded-lg bg-astro-gold font-montserrat text-sm font-semibold uppercase tracking-widest no-underline text-center"
-              style={{color: 'var(--theme-on-accent)'}}>
+              className="nav-cta mt-3 py-3 px-4 rounded-lg bg-astro-gold font-montserrat text-sm font-semibold uppercase tracking-widest no-underline text-center">
               {t(NAV_CTA.labelKey)}
             </Link>
             <div

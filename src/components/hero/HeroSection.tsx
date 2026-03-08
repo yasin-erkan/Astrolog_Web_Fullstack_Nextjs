@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {motion} from 'framer-motion';
+import MoonPhase from './MoonPhase';
 
 const container = {
   hidden: {opacity: 0},
@@ -26,7 +27,7 @@ const floatVariants = {
   },
   float: {
     y: [0, -6, 0],
-    transition: {duration: 4, repeat: Infinity, ease: 'easeInOut'},
+    transition: {duration: 4, repeat: Infinity, ease: 'easeInOut' as const},
   },
 };
 
@@ -94,11 +95,11 @@ export default function HeroSection({
         animate="visible"
       >
         <motion.span
-          className="text-astro-gold text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 block"
+          className="hero-moon-wrap mb-6 sm:mb-8 flex justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36"
           variants={item}
           transition={{duration: 0.5, ease: 'easeOut'}}
         >
-          🌙
+          <MoonPhase className="w-full h-full" variant="hero" />
         </motion.span>
 
         <motion.h1
@@ -106,7 +107,7 @@ export default function HeroSection({
           variants={item}
           transition={{duration: 0.55, ease: 'easeOut'}}
         >
-          Astrolog
+          Luminosa
         </motion.h1>
 
         <motion.p
