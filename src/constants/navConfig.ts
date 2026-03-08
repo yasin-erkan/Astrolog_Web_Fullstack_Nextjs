@@ -37,7 +37,6 @@ export const NAV_ITEMS: NavItem[] = [
         items: [
           { labelKey: 'nav.karmic', pathSegment: 'karmic' },
           { labelKey: 'nav.spiritualGuidance', pathSegment: 'spiritual-guidance' },
-          { labelKey: 'nav.businessPartnership', pathSegment: 'business-partnership' },
           { labelKey: 'nav.electional', pathSegment: 'electional' },
         ],
       },
