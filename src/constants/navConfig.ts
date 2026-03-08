@@ -28,6 +28,8 @@ export const NAV_ITEMS: NavItem[] = [
         items: [
           { labelKey: 'nav.natalChart', pathSegment: 'birth-chart' },
           { labelKey: 'nav.synastry', pathSegment: 'synastry' },
+          { labelKey: 'nav.horaryAstrology', pathSegment: 'horary' },
+          { labelKey: 'nav.rectification', pathSegment: 'rectification' },
         ],
       },
       {
@@ -49,13 +51,19 @@ export const NAV_ITEMS: NavItem[] = [
       {
         groupKey: 'nav.healing.sessions',
         items: [
-          { labelKey: 'nav.elementExercises', pathSegment: 'element-exercises' },
-          { labelKey: 'nav.chakraBalancing', pathSegment: 'chakra-balancing' },
+          { labelKey: 'nav.holisticMovementPilates', pathSegment: 'holistic-movement' },
+          { labelKey: 'nav.bodilyAwareness', pathSegment: 'bodily-awareness' },
+          { labelKey: 'nav.thetaHealingTransformation', pathSegment: 'theta-healing' },
+          { labelKey: 'nav.lifeGuidance', pathSegment: 'life-guidance' },
+          { labelKey: 'nav.spiritOfTimeFrequencies', pathSegment: 'spirit-of-time' },
         ],
       },
       {
         groupKey: 'nav.healing.events',
         items: [
+          { labelKey: 'nav.crystalGuidance', pathSegment: 'crystal-guidance' },
+          { labelKey: 'nav.elementExercises', pathSegment: 'element-exercises' },
+          { labelKey: 'nav.chakraBalancing', pathSegment: 'chakra-balancing' },
           { labelKey: 'nav.groupSessions', pathSegment: 'group-sessions' },
           { labelKey: 'nav.corporateWellness', pathSegment: 'corporate-wellness' },
         ],
@@ -78,7 +86,17 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  { id: 'contact', labelKey: 'nav.contact', path: 'contact', children: [] },
+  {
+    id: 'rituals',
+    labelKey: 'nav.dailyRoutines',
+    path: 'daily-routines',
+    children: [
+      { labelKey: 'nav.planetSalutation', pathSegment: 'planet-salutation' },
+      { labelKey: 'nav.bodilyAwareness', pathSegment: 'bodily-awareness' },
+      { labelKey: 'nav.crystalGuidance', pathSegment: 'crystal-guidance' },
+      { labelKey: 'nav.thetaIntentions', pathSegment: 'theta-intentions' },
+    ],
+  },
 ];
 
 export const NAV_CTA = {

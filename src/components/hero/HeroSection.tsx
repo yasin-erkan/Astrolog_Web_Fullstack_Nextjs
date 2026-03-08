@@ -1,34 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 import MoonPhase from './MoonPhase';
 
-const container = {
-  hidden: { opacity: 0 },
+/**
+ * ADAPTIVE ANIMATIONS
+ * Professional English comments as requested.
+ */
+const containerVariants = {
+  hidden: {opacity: 0},
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    transition: {staggerChildren: 0.2, delayChildren: 0.3},
   },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const floatVariants = {
-  initial: { opacity: 0, x: 12, y: 12 },
-  animate: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { duration: 0.6, delay: 1 },
-  },
-  float: {
-    y: [0, -6, 0],
-    transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' as const },
-  },
+const fadeUp = {
+  hidden: {opacity: 0, y: 30},
+  visible: {opacity: 1, y: 0, transition: {duration: 0.8, ease: 'easeOut' as const}},
 };
 
 type HeroSectionProps = {
@@ -49,71 +39,95 @@ export default function HeroSection({
   lang,
 }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[65vh] sm:min-h-[70vh] md:min-h-[72vh] flex flex-col md:flex-row overflow-hidden">
-      {/* Left: photo in rounded frame (desktop) / top (mobile) */}
-      <div className="relative w-full md:w-[48%] min-h-[32vh] md:min-h-full flex items-center justify-center p-4 md:p-8 theme-bg">
-        <div
-          className="relative w-full max-w-sm md:max-w-md aspect-square rounded-full overflow-hidden border-2 border-astro-gold/40 shadow-[0_20px_60px_rgba(0,0,0,0.25),0_0_0_1px_rgba(179,145,110,0.1)] bg-cover bg-no-repeat bg-center"
-          style={{ backgroundImage: 'url(/umran_foto.jpg)' }}
-          aria-hidden
-        />
+    <section className="relative min-h-[90vh] flex flex-col md:flex-row items-center overflow-hidden theme-bg pt-20 md:pt-0">
+      {/* BACKGROUND DECO: Subtle Zodiac Rings */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-astro-gold/20 rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-astro-gold/10 rounded-full border-dashed" />
       </div>
 
-      {/* Right: content on solid background */}
-      <div className="relative flex-1 flex flex-col items-center justify-center theme-bg px-6 py-12 md:py-16 md:pl-12 md:pr-16 text-center md:text-left">
-        <div className="absolute top-4 right-4 md:top-6 md:right-6 z-10">
+      {/* LEFT SIDE: THE PHOTO PORTAL */}
+      <div className="relative w-full md:w-1/2 flex items-center justify-center p-8 md:p-16 lg:p-20 z-10">
+        <motion.div
+          initial={{opacity: 0, scale: 0.95}}
+          animate={{opacity: 1, scale: 1}}
+          transition={{duration: 1}}
+          className="relative w-full max-w-md group">
+          {/* THE BIRTH CHART SEAL (The Floating Badge)
+              Repositioned to overlap the photo for better visual harmony.
+          */}
           <motion.div
-            variants={floatVariants}
-            initial="initial"
-            animate={['animate', 'float']}
-          >
-            <Link href={`/${lang}/consultations/birth-chart`} className="hero-float-box">
-              {floatingLabel}
+            animate={{y: [0, -10, 0]}}
+            transition={{duration: 4, repeat: Infinity, ease: 'easeInOut'}}
+            className="absolute -top-4 -right-6 z-30 pointer-events-auto">
+            <Link
+              href={`/${lang}/consultations/birth-chart`}
+              className="flex items-center justify-center w-24 h-24 rounded-full border border-astro-gold/40 
+                         bg-black/80 backdrop-blur-xl text-center p-2 shadow-2xl transition-all duration-500
+                         hover:scale-110 hover:border-astro-gold group/seal">
+              <span className="text-[10px] tracking-[0.2em] uppercase text-astro-gold font-bold leading-tight group-hover/seal:text-white">
+                {floatingLabel.replace(' ', '\n')}
+              </span>
             </Link>
           </motion.div>
-        </div>
 
+          {/* MAIN IMAGE CARD */}
+          <motion.div
+            whileHover={{scale: 1.02}}
+            className="relative aspect-3/4 rounded-[3.5rem] overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.9)]">
+            <div
+              className="w-full h-full bg-cover bg-no-repeat transition-transform duration-700 group-hover:scale-110"
+              style={{
+                backgroundImage: 'url(/umran_foto.jpg?v=6)',
+                backgroundPosition: 'center 95%',
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* RIGHT SIDE: THE MANIFESTO */}
+      <div className="relative w-full md:w-1/2 flex flex-col justify-center px-10 py-12 md:pr-24 lg:pr-32 text-center md:text-left z-10">
         <motion.div
-          className="relative z-10 flex flex-col items-center md:items-start max-w-xl mx-auto md:ml-0 w-full"
-          variants={container}
+          variants={containerVariants}
           initial="hidden"
-          animate="visible"
-        >
-          <motion.span
-            className="hero-moon-wrap mb-3 sm:mb-5 flex justify-center md:justify-start w-20 h-20 sm:w-24 sm:h-24"
-            variants={item}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            <MoonPhase className="w-full h-full" variant="hero" />
-          </motion.span>
+          animate="visible">
+          {/* THE RESTORED MOON PHASE (Bigger and glowing) */}
+          <motion.div
+            variants={fadeUp}
+            className="relative mb-12 flex justify-center md:justify-start">
+            <div className="relative w-20 h-20 md:w-24 md:h-24">
+              <div className="absolute inset-0 bg-astro-gold/20 blur-2xl rounded-full animate-pulse" />
+              <MoonPhase
+                variant="hero"
+                className="relative w-full h-full text-astro-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]"
+              />
+            </div>
+          </motion.div>
 
+          {/* WELCOME TEXT (Enhanced Typography) */}
           <motion.p
-            className="font-montserrat text-base sm:text-lg md:text-xl theme-text font-light mb-3 sm:mb-4 tracking-[0.04em]"
-            variants={item}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
+            variants={fadeUp}
+            className="font-montserrat text-astro-gold tracking-[0.4em] text-sm md:text-base mb-6 uppercase font-bold opacity-90">
             {introText}
           </motion.p>
 
-          {headline && (
-            <motion.p
-              className="font-cinzel text-lg sm:text-xl md:text-2xl text-astro-gold/95 mb-2 sm:mb-3 tracking-[0.08em] max-w-lg"
-              variants={item}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-            >
-              {headline}
-            </motion.p>
-          )}
+          {/* MAIN HEADLINE */}
+          <motion.h1
+            variants={fadeUp}
+            className="font-cinzel text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 text-white tracking-tighter">
+            {headline}
+          </motion.h1>
 
+          {/* SUBTITLE */}
           <motion.p
-            className="font-montserrat italic font-extralight text-sm sm:text-base md:text-lg theme-text opacity-90 mb-6 sm:mb-8 max-w-md mx-auto md:mx-0 md:max-w-lg tracking-[0.06em]"
-            variants={item}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
+            variants={fadeUp}
+            className="font-montserrat italic text-lg md:text-xl text-gray-400 mb-12 leading-relaxed font-light max-w-lg">
             {subtitle}
           </motion.p>
 
-          <motion.div className="hero-cta-wrap" variants={item} transition={{ duration: 0.5, ease: 'easeOut' }}>
+          {/* CTA BUTTON */}
+          <motion.div variants={fadeUp} className="hero-cta-wrap">
             <Link href={`/${lang}/free-chart`} className="hero-cta-btn">
               {ctaText}
             </Link>
