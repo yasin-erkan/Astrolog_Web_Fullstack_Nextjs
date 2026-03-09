@@ -100,6 +100,6 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const NAV_CTA = {
-  labelKey: 'nav.ctaFreeChart',
-  path: 'free-chart',
+  labelKey: 'nav.blog',
+  path: 'blog',
 } as const;

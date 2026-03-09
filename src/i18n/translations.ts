@@ -69,6 +69,7 @@ export const translations = {
       dailyRoutines: 'Ümran\'s daily rituals: planet salutation, bodily awareness, crystal guidance and Theta intentions.',
       freeChart: 'Get your free birth chart and discover the map of your sky.',
       contact: 'Contact Astrolog Umran for consultations and sessions.',
+      blog: 'Articles on astrology, holistic healing and daily practice.',
     },
     home: {
       heroIntro: 'Welcome, I am Ümran.',
@@ -93,7 +94,12 @@ export const translations = {
     homeThetaHealing: 'Theta Healing',
     homeDailyRitualsTitle: 'Ümran\'s Daily Rituals',
     homeDailyRitualsSubtitle: 'A promise to live in tune with the spirit of the times.',
-    common: { contentComingSoon: 'Content coming soon.' },
+    common: { contentComingSoon: 'Content coming soon.', readMore: 'Read more' },
+    blog: {
+      all: 'All',
+      notFound: '404 – We couldn’t find this article in the stars.',
+      categories: { world: 'World News', reviews: 'Client Stories', astro: 'Astro Analysis' },
+    },
     holisticMovement: {
       intro: 'Holistic Movement with Pilates is where body, breath and awareness meet. It is not only exercise; it is a moving meditation that aligns your physical practice with your inner rhythm.',
       body1: 'Through controlled, mindful movement we build strength and flexibility while staying present. Each session invites you to listen to your body, respect its limits and discover its potential. The practice supports posture, core stability and a calmer mind.',
@@ -175,6 +181,7 @@ export const translations = {
       dailyRoutines: 'Ümran\'ın günlük ritüelleri: günün gezegenine selamlama, beden farkındalığı, kristal rehberliği ve teta niyetleri.',
       freeChart: 'Ücretsiz doğum haritanızı alın ve gökyüzü haritanızı keşfedin.',
       contact: 'Danışmanlık ve seanslar için Astrolog Umran ile iletişime geçin.',
+      blog: 'Astroloji, bütünsel şifa ve günlük pratik üzerine yazılar.',
     },
     home: {
       heroIntro: 'Hoş geldiniz, ben Ümran.',
@@ -200,7 +207,12 @@ export const translations = {
     homeThetaHealing: 'Theta Healing',
     homeDailyRitualsTitle: 'Ümran\'ın Günlük Ritüelleri',
     homeDailyRitualsSubtitle: 'Zamanın ruhuna uygun yaşama sözü.',
-    common: { contentComingSoon: 'İçerik yakında eklenecek.' },
+    common: { contentComingSoon: 'İçerik yakında eklenecek.', readMore: 'Devamını oku' },
+    blog: {
+      all: 'Tümü',
+      notFound: '404 – Yıldızlarında böyle bir yazı bulamadık.',
+      categories: { world: 'Dünya Haberleri', reviews: 'Müşteri Yorumları', astro: 'Astro-Analiz' },
+    },
     holisticMovement: {
       intro: 'Pilates ile Bütüncül Hareket, beden, nefes ve farkındalığın buluştuğu yerdir. Sadece egzersiz değil; fiziksel pratiğinizi iç ritminizle uyumlu hale getiren hareketli bir meditasyondur.',
       body1: 'Kontrollü ve bilinçli hareketle güç ve esneklik kazanırken anda kalırsınız. Her seans bedeninizi dinlemenizi, sınırlarına saygı göstermenizi ve potansiyelini keşfetmenizi davet eder. Pratik duruş, core stabilitesi ve daha sakin bir zihin sunar.',
@@ -282,6 +294,7 @@ export const translations = {
       dailyRoutines: 'Ümrans tägliche Rituale: Gruß an den Planeten des Tages, Körperbewusstsein, Kristallberatung und Theta-Absichten.',
       freeChart: 'Kostenloses Geburtshoroskop erstellen und Ihre Himmelskarte entdecken.',
       contact: 'Kontakt zu Astrolog Umran für Beratungen und Sitzungen.',
+      blog: 'Artikel zu Astrologie, ganzheitlicher Heilung und täglicher Praxis.',
     },
     home: {
       heroIntro: 'Willkommen, ich bin Ümran.',
@@ -306,7 +319,12 @@ export const translations = {
     homeThetaHealing: 'Theta Healing',
     homeDailyRitualsTitle: 'Ümrans tägliche Rituale',
     homeDailyRitualsSubtitle: 'Ein Versprechen, im Einklang mit dem Geist der Zeit zu leben.',
-    common: { contentComingSoon: 'Inhalt kommt in Kürze.' },
+    common: { contentComingSoon: 'Inhalt kommt in Kürze.', readMore: 'Weiterlesen' },
+    blog: {
+      all: 'Alle',
+      notFound: '404 – Diesen Artikel haben wir in den Sternen nicht gefunden.',
+      categories: { world: 'Weltnachrichten', reviews: 'Kundenstimmen', astro: 'Astro-Analyse' },
+    },
     holisticMovement: {
       intro: 'Ganzheitliche Bewegung mit Pilates ist der Ort, an dem Körper, Atem und Bewusstsein sich treffen. Es ist nicht nur Training, sondern eine bewegte Meditation, die Ihre körperliche Praxis mit Ihrem inneren Rhythmus in Einklang bringt.',
       body1: 'Durch kontrollierte, achtsame Bewegung bauen wir Kraft und Flexibilität auf und bleiben im gegenwärtigen Moment. Jede Einheit lädt Sie ein, auf Ihren Körper zu hören, seine Grenzen zu respektieren und sein Potenzial zu entdecken. Die Praxis unterstützt Haltung, Rumpfstabilität und einen ruhigeren Geist.',
@@ -388,6 +406,7 @@ export const translations = {
       dailyRoutines: 'Rituels quotidiens d\'Ümran: salutation à la planète du jour, conscience corporelle, guidance des cristaux et intentions thêta.',
       freeChart: 'Obtenez votre thème natal gratuit et découvrez la carte de votre ciel.',
       contact: 'Contacter Astrolog Umran pour consultations et séances.',
+      blog: 'Articles sur l’astrologie, la guérison holistique et la pratique quotidienne.',
     },
     home: {
       heroIntro: 'Bienvenue, je suis Ümran.',
@@ -412,7 +431,12 @@ export const translations = {
     homeThetaHealing: 'Theta Healing',
     homeDailyRitualsTitle: 'Rituels quotidiens d\'Ümran',
     homeDailyRitualsSubtitle: 'Une promesse de vivre au rythme de l\'esprit du temps.',
-    common: { contentComingSoon: 'Contenu à venir.' },
+    common: { contentComingSoon: 'Contenu à venir.', readMore: 'Lire la suite' },
+    blog: {
+      all: 'Tout',
+      notFound: '404 – Nous n’avons pas trouvé cet article dans les étoiles.',
+      categories: { world: 'Actualités monde', reviews: 'Témoignages', astro: 'Astro-analyse' },
+    },
     holisticMovement: {
       intro: 'Le mouvement holistique avec le Pilates est l’endroit où le corps, le souffle et la conscience se rencontrent. Ce n’est pas qu’une pratique physique ; c’est une méditation en mouvement qui aligne votre pratique avec votre rythme intérieur.',
       body1: 'Par le mouvement contrôlé et conscient, nous développons force et souplesse tout en restant présents. Chaque séance vous invite à écouter votre corps, respecter ses limites et découvrir son potentiel. La pratique soutient la posture, la stabilité du centre et un mental plus calme.',
