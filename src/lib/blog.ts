@@ -6,6 +6,7 @@ export {
   getPosts,
   getPostBySlug,
   getPostSlugs,
+  getReadingTimeMinutes,
   type Post,
   type BlogCategoryId,
   BLOG_CATEGORY_IDS,

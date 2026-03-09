@@ -98,6 +98,7 @@ export const translations = {
     blog: {
       all: 'All',
       notFound: '404 – We couldn’t find this article in the stars.',
+      readTime: 'min read',
       categories: { world: 'World News', reviews: 'Client Stories', astro: 'Astro Analysis' },
     },
     holisticMovement: {
@@ -211,6 +212,7 @@ export const translations = {
     blog: {
       all: 'Tümü',
       notFound: '404 – Yıldızlarında böyle bir yazı bulamadık.',
+      readTime: 'dk okuma',
       categories: { world: 'Dünya Haberleri', reviews: 'Müşteri Yorumları', astro: 'Astro-Analiz' },
     },
     holisticMovement: {
@@ -323,6 +325,7 @@ export const translations = {
     blog: {
       all: 'Alle',
       notFound: '404 – Diesen Artikel haben wir in den Sternen nicht gefunden.',
+      readTime: 'Min. Lesezeit',
       categories: { world: 'Weltnachrichten', reviews: 'Kundenstimmen', astro: 'Astro-Analyse' },
     },
     holisticMovement: {
@@ -435,6 +438,7 @@ export const translations = {
     blog: {
       all: 'Tout',
       notFound: '404 – Nous n’avons pas trouvé cet article dans les étoiles.',
+      readTime: 'min lecture',
       categories: { world: 'Actualités monde', reviews: 'Témoignages', astro: 'Astro-analyse' },
     },
     holisticMovement: {

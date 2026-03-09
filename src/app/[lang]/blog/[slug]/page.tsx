@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {notFound} from 'next/navigation';
+import DOMPurify from 'isomorphic-dompurify';
 import {getTranslations} from '@/i18n/translations';
 import {getPostBySlug, getPostSlugs} from '@/lib/blog';
+import {getReadingTimeMinutes} from '@/constants/posts';
 
 type Props = {params: Promise<{lang: string; slug: string}>};
 
@@ -26,6 +29,13 @@ export default async function BlogDetailPage({params}: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const sanitizedContent = DOMPurify.sanitize(post.content.trim(), {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'h2', 'h3'],
+    ALLOWED_ATTR: ['href', 'target', 'rel'],
+  });
+
+  const readingMin = getReadingTimeMinutes(post.content);
+
   return (
     <main className="max-w-[720px] mx-auto px-4 sm:px-6 py-10 sm:py-14">
       <Link
@@ -35,23 +45,41 @@ export default async function BlogDetailPage({params}: Props) {
         ← {t('nav.blog')}
       </Link>
 
-      <time
-        dateTime={post.date}
-        className="text-xs sm:text-sm text-astro-gold/90 font-montserrat uppercase tracking-wider block mb-2"
-      >
-        {new Date(post.date).toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'de' ? 'de-DE' : lang === 'fr' ? 'fr-FR' : 'en-GB', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </time>
+      <div className="flex flex-wrap items-center gap-3 mb-2">
+        <time
+          dateTime={post.date}
+          className="text-xs sm:text-sm text-astro-gold/90 font-montserrat uppercase tracking-wider"
+        >
+          {new Date(post.date).toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'de' ? 'de-DE' : lang === 'fr' ? 'fr-FR' : 'en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+        <span className="text-xs theme-text/60 font-montserrat">
+          {readingMin} {t('blog.readTime')}
+        </span>
+      </div>
       <h1 className="font-cinzel text-2xl sm:text-3xl theme-text tracking-wide mb-6">
         {post.title}
       </h1>
 
-      <div
-        className="theme-text opacity-90 text-sm sm:text-base leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0"
-        dangerouslySetInnerHTML={{__html: post.content.trim()}}
+      {post.image && (
+        <div className="relative aspect-video w-full rounded-xl overflow-hidden mb-8 bg-neutral-800">
+          <Image
+            src={post.image}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 720px"
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
+
+      <article
+        className="prose prose-lg max-w-none theme-text prose-headings:font-cinzel prose-headings:theme-text prose-p:leading-relaxed prose-a:text-astro-gold prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl"
+        dangerouslySetInnerHTML={{__html: sanitizedContent}}
       />
     </main>
   );

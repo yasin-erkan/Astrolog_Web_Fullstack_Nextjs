@@ -93,3 +93,10 @@ export function getPostBySlug(slug: string): Post | undefined {
 export function getPostSlugs(): string[] {
   return POSTS.map((p) => p.slug);
 }
+
+/** Rough reading time from HTML content (~200 words/min). */
+export function getReadingTimeMinutes(html: string): number {
+  const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const words = text ? text.split(' ').length : 0;
+  return Math.max(1, Math.ceil(words / 200));
+}
