@@ -1,5 +1,15 @@
 import {getTranslations} from '@/i18n/translations';
 
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}) {
+  const {lang} = await params;
+  const {t, locale} = getTranslations(lang);
+  const meta = (locale as {meta?: {contact?: string}}).meta;
+  return {
+    title: t('pages.contact'),
+    description: meta?.contact ?? undefined,
+  };
+}
+
 export default async function ContactPage({
   params,
 }: {

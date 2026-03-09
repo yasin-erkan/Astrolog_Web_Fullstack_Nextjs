@@ -13,6 +13,27 @@ export function generateStaticParams() {
   return LOCALE_CODES.map(lang => ({lang}));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}) {
+  const {lang} = await params;
+  const {locale} = getTranslations(lang);
+  const name = locale.brand?.name ?? 'Astrolog Umran';
+  const tagline = locale.brand?.tagline ?? '';
+  const description = (locale as {meta?: {defaultDescription?: string}}).meta?.defaultDescription ?? 'Astrolog Umran – Astrology & holistic healing.';
+  return {
+    title: {default: `${name} – ${tagline}`, template: '%s | Astrolog Umran'},
+    description,
+    openGraph: {
+      title: `${name} – ${tagline}`,
+      description,
+      type: 'website',
+    },
+  };
+}
+
 export default async function RootLayout({
   children,
   params,

@@ -38,6 +38,7 @@ export const NAV_ITEMS: NavItem[] = [
           { labelKey: 'nav.karmic', pathSegment: 'karmic' },
           { labelKey: 'nav.spiritualGuidance', pathSegment: 'spiritual-guidance' },
           { labelKey: 'nav.electional', pathSegment: 'electional' },
+          { labelKey: 'nav.predictiveAstrology', pathSegment: 'predictive' },
         ],
       },
     ],

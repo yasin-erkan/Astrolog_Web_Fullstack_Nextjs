@@ -1,5 +1,15 @@
 import {getTranslations} from '@/i18n/translations';
 
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}) {
+  const {lang} = await params;
+  const {t, locale} = getTranslations(lang);
+  const meta = (locale as {meta?: {healing?: string}}).meta;
+  return {
+    title: t('pages.healing'),
+    description: meta?.healing ?? undefined,
+  };
+}
+
 export default async function HealingPage({
   params,
 }: {
