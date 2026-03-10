@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { getMoonPhase, getMoonPhaseId, type MoonPhaseId } from '@/lib/moonPhase';
 
@@ -20,7 +21,7 @@ const phaseSvgs: Record<MoonPhaseId, ReactNode> = {
   'first-quarter': (
     <g fill="currentColor">
       <circle cx="50" cy="50" r="22" />
-      <path d="M50 28 L50 72 L72 50 Z" style={{ fill: 'var(--theme-bg)' }} />
+      <path d="M50 28 A22 22 0 0 1 50 72 L50 28 Z" style={{ fill: 'var(--theme-bg)' }} />
     </g>
   ),
   'waxing-gibbous': (
@@ -39,7 +40,7 @@ const phaseSvgs: Record<MoonPhaseId, ReactNode> = {
   'last-quarter': (
     <g fill="currentColor">
       <circle cx="50" cy="50" r="22" />
-      <path d="M50 28 L50 72 L28 50 Z" style={{ fill: 'var(--theme-bg)' }} />
+      <path d="M50 28 L50 72 A22 22 0 0 1 50 28 Z" style={{ fill: 'var(--theme-bg)' }} />
     </g>
   ),
   'waning-crescent': (
@@ -80,7 +81,7 @@ const phaseSvgsHero: Record<MoonPhaseId, ReactNode> = {
   'first-quarter': (
     <g>
       <circle cx="50" cy="50" r="22" fill="url(#heroMoonGrad)" />
-      <path d="M50 28 L50 72 L72 50 Z" fill="var(--theme-bg)" />
+      <path d="M50 28 A22 22 0 0 1 50 72 L50 28 Z" fill="var(--theme-bg)" />
     </g>
   ),
   'waxing-gibbous': (
@@ -99,7 +100,7 @@ const phaseSvgsHero: Record<MoonPhaseId, ReactNode> = {
   'last-quarter': (
     <g>
       <circle cx="50" cy="50" r="22" fill="url(#heroMoonGrad)" />
-      <path d="M50 28 L50 72 L28 50 Z" fill="var(--theme-bg)" />
+      <path d="M50 28 L50 72 A22 22 0 0 1 50 28 Z" fill="var(--theme-bg)" />
     </g>
   ),
   'waning-crescent': (
@@ -111,7 +112,7 @@ const phaseSvgsHero: Record<MoonPhaseId, ReactNode> = {
 };
 
 export default function MoonPhase({
-  date = new Date(),
+  date,
   className = '',
   variant,
 }: {
@@ -119,9 +120,14 @@ export default function MoonPhase({
   className?: string;
   variant?: 'default' | 'hero';
 }) {
-  const phase = getMoonPhase(date);
-  const phaseId = getMoonPhaseId(phase);
+  const [clientDate, setClientDate] = useState<Date | null>(variant === 'hero' ? null : (date ?? new Date()));
+  useEffect(() => {
+    if (variant === 'hero') setClientDate(new Date());
+  }, [variant]);
   const isHero = variant === 'hero';
+  const effectiveDate = isHero ? (clientDate ?? date ?? new Date()) : (date ?? new Date());
+  const phase = getMoonPhase(effectiveDate);
+  const phaseId = getMoonPhaseId(phase);
   const content = isHero ? phaseSvgsHero[phaseId] : phaseSvgs[phaseId];
 
   return (

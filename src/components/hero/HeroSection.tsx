@@ -96,7 +96,7 @@ export default function HeroSection({
           <motion.div
             variants={fadeUp}
             className="relative mb-12 flex justify-center md:justify-start">
-            <div className="relative w-20 h-20 md:w-24 md:h-24">
+            <div className="relative w-28 h-28 md:w-36 md:h-36">
               <div className="absolute inset-0 bg-astro-gold/20 blur-2xl rounded-full animate-pulse" />
               <MoonPhase
                 variant="hero"
