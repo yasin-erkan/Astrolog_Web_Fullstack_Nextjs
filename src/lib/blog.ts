@@ -7,7 +7,9 @@ export {
   getPostBySlug,
   getPostSlugs,
   getReadingTimeMinutes,
-  type Post,
+  type PostLocalized as Post,
   type BlogCategoryId,
+  type BlogLocale,
   BLOG_CATEGORY_IDS,
+  BLOG_LOCALES,
 } from '@/constants/posts';

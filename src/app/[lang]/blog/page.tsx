@@ -28,7 +28,7 @@ export default async function BlogListPage({
   const {category: categoryParam} = await searchParams;
   const category = categoryParam && isValidCategory(categoryParam) ? categoryParam : undefined;
   const {t} = getTranslations(lang);
-  const posts = getPosts(category);
+  const posts = getPosts(lang, category);
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
@@ -70,13 +70,13 @@ export default async function BlogListPage({
               className="block h-full theme-bg theme-border border rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-[0_12px_40px_rgba(179,145,110,0.2)] hover:border-astro-gold/30 hover:-translate-y-0.5"
             >
               {post.image && (
-                <div className="relative aspect-video w-full bg-neutral-800">
+                <div className="relative aspect-[4/3] w-full bg-neutral-900 overflow-hidden">
                   <Image
                     src={post.image}
                     alt=""
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-cover object-center"
                   />
                 </div>
               )}

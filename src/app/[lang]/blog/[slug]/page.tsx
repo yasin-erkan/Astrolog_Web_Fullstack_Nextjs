@@ -3,19 +3,20 @@ import Image from 'next/image';
 import {notFound} from 'next/navigation';
 import DOMPurify from 'isomorphic-dompurify';
 import {getTranslations} from '@/i18n/translations';
-import {getPostBySlug, getPostSlugs} from '@/lib/blog';
+import {getPostBySlug, getPostSlugs, BLOG_LOCALES} from '@/lib/blog';
 import {getReadingTimeMinutes} from '@/constants/posts';
 
 type Props = {params: Promise<{lang: string; slug: string}>};
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({slug}));
+  const slugs = getPostSlugs();
+  return slugs.flatMap((slug) => BLOG_LOCALES.map((lang) => ({lang, slug})));
 }
 
 export async function generateMetadata({params}: Props) {
   const {lang, slug} = await params;
   const {t} = getTranslations(lang);
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(slug, lang);
   if (!post) return {title: t('nav.blog')};
   return {
     title: post.title,
@@ -26,7 +27,7 @@ export async function generateMetadata({params}: Props) {
 export default async function BlogDetailPage({params}: Props) {
   const {lang, slug} = await params;
   const {t} = getTranslations(lang);
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(slug, lang);
   if (!post) notFound();
 
   const sanitizedContent = DOMPurify.sanitize(post.content.trim(), {
@@ -65,13 +66,13 @@ export default async function BlogDetailPage({params}: Props) {
       </h1>
 
       {post.image && (
-        <div className="relative aspect-video w-full rounded-xl overflow-hidden mb-8 bg-neutral-800">
+        <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-8 bg-neutral-900">
           <Image
             src={post.image}
             alt=""
             fill
             sizes="(max-width: 768px) 100vw, 720px"
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
         </div>
