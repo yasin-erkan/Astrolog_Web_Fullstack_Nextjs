@@ -49,7 +49,7 @@ export default async function Home({
         <p className="font-montserrat text-sm sm:text-base theme-text/90 italic">{locale.homeDailyRitualsSubtitle}</p>
       </section>
 
-      <ZodiacSection signs={signs} title={locale.home.yourSkyGuide} />
+      <ZodiacSection signs={signs} title={locale.home.yourSkyGuide} subtitle={locale.home.yourSkyGuideSubtitle} lang={lang} />
     </main>
   );
 }

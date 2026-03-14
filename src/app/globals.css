@@ -354,6 +354,25 @@ body {
   border-color: rgba(179, 145, 110, 0.2);
 }
 
+/* Hero: Birth Chart seal – visible in light and dark theme */
+[data-theme="dark"] .hero-seal {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: rgba(179, 145, 110, 0.5);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.1) inset, 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+[data-theme="dark"] .hero-seal:hover {
+  border-color: #b3916e;
+  background-color: rgba(179, 145, 110, 0.1);
+  box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+}
+[data-theme="dark"] .hero-seal-text {
+  color: rgba(212, 175, 55, 0.95);
+}
+[data-theme="dark"] .hero-seal:hover .hero-seal-text {
+  color: #b3916e;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+}
+
 .hero-float-wrap {
   right: 5%;
   bottom: 18%;

@@ -1,36 +1,28 @@
-Multilingual site for **Astrology & Holistic Healing** — brand **Luminosa**.
-Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
+Multilingual site for **Astrolog Umran** — Astrology & Holistic Healing.  
+Next.js 16, React 19, Tailwind v4, Framer Motion. **TR, EN, DE, FR.**
+
+The project is actively maintained. See **Features** and **Roadmap** below.
 
 ---
 
-## Screenshots
+## Demo
 
-`public/1.png`, `public/2.png`, `public/3.png`.
-
-| |
-| :---: |
-| ![Home](public/1.png) |
-| *Home — hero* |
-
-| |
-| :---: |
-| ![Screenshot 2](public/2.png) |
-
-| |
-| :---: |
-| ![Screenshot 3](public/3.png) |
+|                                                        |
+| :----------------------------------------------------: |
+| ![Astrolog Umran site demo](public/astrolog_umran.gif) |
+|           _Site preview — Astrolog Umran_              |
 
 ---
 
 ## Tech Stack
 
-| Area      | Stack                                     |
-| --------- | ----------------------------------------- |
-| Framework | Next.js 16 (App Router)                   |
-| UI        | React 19, Tailwind CSS v4, Framer Motion  |
-| Language  | TypeScript                                |
-| Fonts     | Google Fonts (Cinzel, Montserrat)         |
-| i18n      | In-app `translations.ts` (en, tr, de, fr) |
+| Area      | Stack                                                      |
+| --------- | ---------------------------------------------------------- |
+| Framework | Next.js 16 (App Router)                                    |
+| UI        | React 19, Tailwind CSS v4, Framer Motion                   |
+| Language  | TypeScript                                                 |
+| Fonts     | Google Fonts (Cinzel, Montserrat)                          |
+| i18n      | Modular locales (`src/i18n/locales/*.ts`) — en, tr, de, fr |
 
 ---
 
@@ -39,81 +31,116 @@ Next.js 16, React 19, Tailwind v4, Framer Motion. TR, EN, DE, FR.
 ```
 src/
 ├── app/
-│   ├── [lang]/                    # Locale: tr, en, de, fr
-│   │   ├── layout.tsx             # Root layout, Navbar, Footer, theme
-│   │   ├── page.tsx               # Home (HeroSection + ZodiacSection)
-│   │   ├── consultations/        # Birth chart, Synastry, Karmic, etc.
-│   │   ├── healing/               # Sessions, events, sub-pages
-│   │   ├── academy/               # Beginner, recordings, blog, sky-calendar
+│   ├── [lang]/                        # Locale: tr, en, de, fr
+│   │   ├── layout.tsx                 # Root layout, Navbar, Footer, theme
+│   │   ├── loading.tsx                # Astrolog-themed loading animation
+│   │   ├── page.tsx                   # Home (Hero, Services, Rituals, ZodiacSection)
+│   │   ├── consultations/
+│   │   │   ├── page.tsx               # Main consultations page
+│   │   │   ├── slugs.ts               # Valid slugs + slug → locale/nav key
+│   │   │   └── [slug]/page.tsx        # birth-chart, synastry, horary, etc.
+│   │   ├── healing/
+│   │   │   ├── page.tsx
+│   │   │   ├── slugs.ts
+│   │   │   └── [slug]/page.tsx        # holistic-movement, theta-healing, etc.
+│   │   ├── academy/
+│   │   │   ├── page.tsx
+│   │   │   ├── slugs.ts
+│   │   │   └── [slug]/page.tsx        # beginner, recordings, sky-calendar, blog
+│   │   ├── daily-routines/
+│   │   │   ├── page.tsx
+│   │   │   ├── slugs.ts
+│   │   │   └── [slug]/page.tsx        # planet-salutation, theta-intentions, etc.
+│   │   ├── zodiac/
+│   │   │   ├── slugs.ts
+│   │   │   └── [slug]/page.tsx        # aries, taurus, ... (12 signs)
+│   │   ├── blog/
+│   │   │   ├── page.tsx
+│   │   │   └── [slug]/page.tsx        # Blog post detail
 │   │   ├── free-chart/
 │   │   └── contact/
-│   └── globals.css                # Theme vars, hero, nav, footer, zodiac
+│   └── globals.css                    # Theme vars, hero, nav, footer, zodiac
 ├── components/
 │   ├── hero/
-│   │   ├── HeroSection.tsx        # Parallax rings, stagger, CTA fill, floating box
-│   │   └── MoonPhase.tsx          # Dynamic moon phase (hero variant: gradient + glow)
+│   │   ├── HeroSection.tsx            # Rings, moon phase, CTA, floating Birth Chart seal (theme-aware)
+│   │   └── MoonPhase.tsx
 │   ├── home/
-│   │   └── ZodiacSection.tsx      # Scroll reveal, element-based hover glow
+│   │   └── ZodiacSection.tsx          # 12 signs → /zodiac/[slug], element colors, hover tooltip (keywords)
 │   ├── navbar/
-│   │   └── Navbar.tsx             # Logo, mega dropdowns, theme/lang, CTA
-│   └── footer/
-│       └── Footer.tsx             # Brand, tagline, social links, quick links
+│   │   └── Navbar.tsx                 # Logo, dropdowns, theme/lang, CTA, aria-labels
+│   ├── footer/
+│   │   └── Footer.tsx
+│   ├── SectionSubPageContent.tsx      # Shared sub-page layout (title, intro, body, highlights, optional rightSlot)
+│   └── healing/
+│       └── HolisticMovementPhoto.tsx
 ├── constants/
-│   ├── navConfig.ts               # NAV_ITEMS, NAV_CTA
+│   ├── navConfig.ts
 │   ├── nav.ts
-│   └── footer.ts                  # Social links (YouTube, LinkedIn, etc.)
+│   ├── posts.ts                       # Blog posts (localized title, excerpt, content)
+│   └── footer.ts
 ├── i18n/
-│   └── translations.ts            # t(), getTranslations, locale copy
+│   ├── types.ts                       # Locale, PageBlock, ZodiacSign, ZodiacElement
+│   ├── translations.ts                # Merges locale modules, getTranslations(), t()
+│   └── locales/
+│       ├── nav.ts
+│       ├── home.ts                    # Hero, yourSkyGuide, yourSkyGuideSubtitle, zodiacSigns (slug, element, keywords)
+│       ├── blog.ts
+│       ├── pages.ts                   # Main pages (consultations, healing, academy, …)
+│       ├── consultationsSub.ts        # Per-consultation sub-page content (4 langs)
+│       ├── healingSub.ts
+│       ├── academySub.ts
+│       ├── dailyRoutinesSub.ts
+│       └── zodiacSub.ts               # Per-sign page content (4 langs)
 └── lib/
     ├── fonts.ts
-    └── moonPhase.ts               # getMoonPhase(), getMoonPhaseId() for today's phase
+    ├── blog.ts                        # getPosts, getPostBySlug (re-exports from constants/posts)
+    └── moonPhase.ts
 public/
-├── 1.png, 2.png, 3.png            # Screenshots
+├── astrolog_umran.gif   # Demo GIF
+├── umran_foto.jpg
+├── pilates.png
+└── logo.png
 ```
 
 ---
 
 ## Getting Started
 
-```bash
-npm install
-npm run dev   # http://localhost:3000
-npm run build
-npm start
-```
-
-Root `/` redirects to `/tr`.
+Root `/` redirects to default locale (e.g. `/tr`).
 
 ---
 
 ## Locales & Routes
 
-- **tr** (default), **en**, **de**, **fr**
-- URLs: `/[lang]/...` (e.g. `/en/consultations/birth-chart`)
-- Nav: click-to-open dropdowns (Consultations, Healing, Academy), theme toggle, language selector
+- **Locales:** tr, en, de, fr — all content and SEO (metaTitle, metaDescription) per page/sub-page.
+- **URLs:** `/[lang]/...` (e.g. `/en/consultations/birth-chart`, `/tr/zodiac/aries`).
+- **Dynamic [slug] sections:** Consultations, Healing, Academy, Daily Routines, Zodiac — one `slugs.ts` + `[slug]/page.tsx` per section; `generateStaticParams` for static generation.
+- **Nav:** Dropdowns (Consultations, Healing, Academy), theme toggle, language selector; aria-labels for accessibility.
 
 ---
 
 ## Design
 
-- **Theme:** CSS vars in `globals.css` — `--theme-bg`, `--theme-text`, `--theme-border`; dark mode `[data-theme="dark"]`.
+- **Theme:** CSS vars in `globals.css` — `--theme-bg`, `--theme-text`, `--theme-border`; dark mode via `[data-theme="dark"]`.
 - **Accent:** `#b3916e` (astro-gold) — buttons, links, logo, hero.
-- **Fonts:** Cinzel (headings / luxury), Montserrat (body); italic extralight for hero subtitle.
-- **Hero:** Layered parallax (slow-rotating rings), **dynamic moon phase** (today’s phase, gradient + glow in hero), stagger slide-up, CTA left-to-right fill, floating “Birth Chart” box (i18n).
-- **Home:** “Your Sky Guide” zodiac section — scroll-triggered stagger reveal, element-based hover glow (fire/earth/air/water).
-- **Logo:** SVG — outer ring, inner ring, 8-point star, dots; brand name “Luminosa” in nav/footer.
-- **Responsive:** Mobile hamburger, dropdowns in portal with fixed position, hero and nav scale for small screens.
+- **Fonts:** Cinzel (headings), Montserrat (body).
+- **Hero:** Zodiac rings, dynamic moon phase, stagger, CTA, floating “Birth Chart” seal (smaller, theme-aware for light/dark).
+- **Home:** “Your Sky Guide” — subtitle CTA (e.g. “Choose your sign and start your journey”), 12 zodiac cards linking to `/[lang]/zodiac/[slug]`, element-based border/glow (fire/earth/air/water), hover tooltip with 3 keywords per sign.
+- **Sub-pages:** Shared `SectionSubPageContent` (or consultation-specific component); optional `rightSlot` for image (e.g. holistic-movement photo).
+- **Responsive:** Mobile hamburger, fixed dropdowns, loading state (`loading.tsx`) for [lang] routes.
 
 ---
 
 ## Features
 
 - [x] Multi-language (tr, en, de, fr) and language switcher
-- [x] Nav: logo, Consultations / Healing / Academy mega dropdowns (click), CTA “Free Chart”, theme + lang
-- [x] Home: hero (parallax rings, dynamic moon phase, stagger, CTA, floating box), ZodiacSection (scroll reveal, element glow)
-- [x] Footer: brand Luminosa, tagline, social links (YouTube, LinkedIn, Instagram, X, Facebook), quick links, copyright
-- [x] Consultations: Birth Chart, Synastry, Karmic, Spiritual, Business, Electional
-- [x] Healing: sessions + events groups; Academy: beginner, recordings, blog, sky-calendar
+- [x] Nav: logo (Astrolog Umran), Consultations / Healing / Academy dropdowns, CTA “Free Chart”, theme + lang; aria-labels
+- [x] Home: hero (rings, moon phase, CTA, floating Birth Chart seal), Services strip, Daily Rituals teaser, ZodiacSection (links to /zodiac/[slug], element colors, keyword tooltips)
+- [x] Consultations, Healing, Academy, Daily Routines: main page + [slug] sub-pages (single template per section, content from locale modules)
+- [x] Zodiac: 12 sign pages at /[lang]/zodiac/[slug] with localized content (intro, body, “today” tip, highlights)
+- [x] Blog: list + [slug] detail; localized posts (title, excerpt, content)
+- [x] SEO: metaTitle / metaDescription per page and sub-page (from i18n)
+- [x] Loading: astrolog-themed loading animation for [lang] routes
 - [x] Dark/light theme
 - [x] Responsive layout and nav
 
@@ -121,11 +148,10 @@ Root `/` redirects to `/tr`.
 
 ## Roadmap
 
-- [ ] Content: About, localized copy
-- [ ] Contact: form / map
+- [ ] Content: expand copy where placeholder; About page if needed
+- [ ] Contact: form and/or map
 - [ ] CTA: booking or contact flow
-- [ ] SEO: per-page and per-locale metadata
-- [ ] Backend / admin if needed
+- [ ] Backend / CMS: feed consultationsSub, healingSub, academySub, dailyRoutinesSub, zodiacSub (and blog) from API; same page/layout shape
 
 ---
 

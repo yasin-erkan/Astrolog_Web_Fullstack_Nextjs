@@ -53,20 +53,23 @@ export default function HeroSection({
           animate={{opacity: 1, scale: 1}}
           transition={{duration: 1}}
           className="relative w-full max-w-md group">
-          {/* THE BIRTH CHART SEAL (The Floating Badge)
-              Repositioned to overlap the photo for better visual harmony.
-          */}
+          {/* Birth Chart seal: smaller badge, visible in both light and dark theme */}
           <motion.div
-            animate={{y: [0, -10, 0]}}
-            transition={{duration: 4, repeat: Infinity, ease: 'easeInOut'}}
-            className="absolute -top-4 -right-6 z-30 pointer-events-auto">
+            animate={{y: [0, -6, 0]}}
+            transition={{duration: 5, repeat: Infinity, ease: 'easeInOut'}}
+            className="absolute -top-2 -right-2 md:top-4 md:right-4 z-30 pointer-events-auto">
             <Link
               href={`/${lang}/consultations/birth-chart`}
-              className="flex items-center justify-center w-24 h-24 rounded-full border border-astro-gold/40 
-                         bg-black/80 backdrop-blur-xl text-center p-2 shadow-2xl transition-all duration-500
-                         hover:scale-110 hover:border-astro-gold group/seal">
-              <span className="text-[10px] tracking-[0.2em] uppercase text-astro-gold font-bold leading-tight group-hover/seal:text-white">
-                {floatingLabel.replace(' ', '\n')}
+              className="hero-seal flex items-center justify-center w-24 h-24 rounded-full
+                         border-2 bg-white/95 backdrop-blur-md
+                         border-amber-800/70 text-amber-900
+                         shadow-[0_0_0_1px_rgba(0,0,0,0.06)_inset,0_20px_40px_-12px_rgba(0,0,0,0.35)]
+                         transition-all duration-500 hover:scale-[1.08] hover:border-amber-700 hover:bg-amber-50/95
+                         hover:shadow-[0_0_25px_-5px_rgba(180,130,70,0.3),0_0_0_1px_rgba(0,0,0,0.08)_inset]
+                         group/seal focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
+              <span className="hero-seal-text font-cinzel text-[10px] tracking-[0.2em] uppercase leading-tight text-center px-1.5"
+                    style={{wordBreak: 'break-word'}}>
+                {floatingLabel.includes(' ') ? floatingLabel.replace(' ', '\n') : floatingLabel}
               </span>
             </Link>
           </motion.div>

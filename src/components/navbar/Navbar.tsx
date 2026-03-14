@@ -186,7 +186,8 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
           className="max-w-[1750px] mx-auto flex flex-wrap items-center justify-between gap-3 pl-4 pr-4 md:pl-12 md:pr-16 lg:pr-20 md:gap-5">
           <Link
             href={`/${lang}`}
-            className="flex items-center gap-3 md:gap-4 shrink-0 no-underline rounded-lg transition-all duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold/50">
+            className="flex items-center gap-3 md:gap-4 shrink-0 no-underline rounded-lg transition-all duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold/50"
+            aria-label="Astrolog Umran – Home">
             <div className="relative w-[60px] h-[60px] md:w-[88px] md:h-[88px] flex justify-center items-center shrink-0 overflow-hidden rounded-full">
               <Image
                 src="/logo.png"
@@ -229,7 +230,8 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
                     <Link
                       key={item.id}
                       href={fullPath}
-                      className={navLinkClass(isActive(item.path))}>
+                      className={navLinkClass(isActive(item.path))}
+                      aria-label={t(item.labelKey)}>
                       {t(item.labelKey)}
                     </Link>
                   );
@@ -260,7 +262,8 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
                           : 'theme-text'
                       }`}
                       aria-expanded={openMenu === item.id}
-                      aria-haspopup="true">
+                      aria-haspopup="true"
+                      aria-label={`${t(item.labelKey)} – open menu`}>
                       {t(item.labelKey)} ▾
                     </button>
                     {openMenu === item.id &&
@@ -291,7 +294,8 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
             <div className="flex items-center shrink-0 w-[240px] lg:w-[280px] gap-2 pl-3">
               <Link
                 href={`/${lang}/${NAV_CTA.path}`}
-                className="nav-cta flex-1 min-w-[8.5rem] py-2.5 rounded-md font-montserrat text-[13px] lg:text-[14px] tracking-widest uppercase no-underline font-semibold transition-all duration-200 hover:brightness-110 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold focus-visible:ring-offset-2 focus-visible:ring-offset-(--theme-bg) text-center whitespace-nowrap overflow-hidden text-ellipsis px-3">
+                className="nav-cta flex-1 min-w-[8.5rem] py-2.5 rounded-md font-montserrat text-[13px] lg:text-[14px] tracking-widest uppercase no-underline font-semibold transition-all duration-200 hover:brightness-110 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-astro-gold focus-visible:ring-offset-2 focus-visible:ring-offset-(--theme-bg) text-center whitespace-nowrap overflow-hidden text-ellipsis px-3"
+                aria-label={t(NAV_CTA.labelKey)}>
                 {t(NAV_CTA.labelKey)}
               </Link>
               <div className="flex items-center shrink-0 gap-1.5">
@@ -323,6 +327,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
                   style={{fontSize: '1.2rem'}}
                   aria-expanded={langOpen}
                   aria-haspopup="true"
+                  aria-label={`Select language. Current: ${LOCALES.find(l => l.code === lang)?.label ?? lang}`}
                   title={LOCALES.find(l => l.code === lang)?.label}>
                   {LOCALES.find(l => l.code === lang)?.flag ?? '🌐'} ▾
                 </button>
@@ -339,6 +344,7 @@ const Navbar = ({lang = 'en'}: {lang?: string}) => {
                           href={`/${code}${pathWithoutLang}`}
                           onClick={() => setLangOpen(false)}
                           title={label}
+                          aria-label={`Switch to ${label}`}
                           className={`no-underline block leading-none py-2.5 px-2 rounded-md transition-transform duration-200 hover:scale-110 ${code === lang ? 'opacity-100' : 'opacity-70 hover:opacity-90'}`}
                           style={{fontSize: '1.3rem'}}>
                           {flag}
